@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -26,7 +25,7 @@ namespace Pixie1
         private static PixieGame instance = null;
         GraphicsDeviceManager graphics;
         int myWindowWidth = 1024;
-        int myWindowHeight = 768; 
+        int myWindowHeight = 740; 
         PixieScreenlet mainScreenlet;
         MusicEngine musicEngine;
         Level level;
@@ -35,7 +34,7 @@ namespace Pixie1
         {
             instance = this;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.PreferredBackBufferHeight = myWindowHeight;
             graphics.PreferredBackBufferWidth = myWindowWidth;
             Content.RootDirectory = "Content";

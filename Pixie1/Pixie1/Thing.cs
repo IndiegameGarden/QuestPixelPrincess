@@ -357,10 +357,8 @@ namespace Pixie1
                 return true;
             if (bgSampleRect.Bottom >= bg.Texture.Height)
                 return true;
-            int N = bgSampleRect.Width * bgSampleRect.Height;
-            Color[] bgTextureData = new Color[N];
-            bg.Texture.GetData<Color>(0, bgSampleRect, bgTextureData, 0, N);
-            return IntersectPixelsBg(thingRect, textureData, bgSampleRect, bgTextureData);
+            int bgWidth = bg.Texture.Width;
+            return IntersectPixelsBg(thingRect, textureData, bgSampleRect, bg.textureData, bgWidth);
         }
 
         /// <summary>
@@ -415,13 +413,12 @@ namespace Pixie1
         /// <param name="rectangleA">Bounding rectangle of the sprite</param>
         /// <param name="dataA">Pixel data of the sprite</param>
         /// <param name="rectangleB">Bouding rectangle of the background snapshot</param>
-        /// <param name="dataB">Pixel data of the background snapshot</param>
+        /// <param name="dataB">Pixel data of WHOLE BACKGROUND</param>
+        /// <param name="bgWidth">Width of WHOLE BACKGROUND</param>
         /// <returns>True if collision with background; false otherwise</returns>
         bool IntersectPixelsBg(Rectangle rectangleA, Color[] dataA,
-                                    Rectangle rectangleB, Color[] dataB)
-        {
-           
-
+                                    Rectangle rectangleB, Color[] dataB, int bgWidth)
+        {          
             // Find the bounds of the rectangle intersection
             int top = Math.Max(rectangleA.Top, rectangleB.Top);
             int bottom = Math.Min(rectangleA.Bottom, rectangleB.Bottom);
@@ -436,8 +433,7 @@ namespace Pixie1
                     // Get the color of both pixels at this point
                     Color colorA = dataA[(x - rectangleA.Left) +
                                          (y - rectangleA.Top) * rectangleA.Width];
-                    Color colorB = dataB[(x - rectangleB.Left) +
-                                         (y - rectangleB.Top) * rectangleB.Width];
+                    Color colorB = dataB[(x) + (y) * bgWidth];
 
                     // If pixel A not completely transparent,
                     // and BG pixel non-passable (by comparing intensity to threshold),
