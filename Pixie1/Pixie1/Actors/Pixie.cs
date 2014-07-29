@@ -15,7 +15,7 @@ namespace Pixie1.Actors
         {            
             IsCollisionFree = false;
             SetColors(4f,new Color(205,130,1),Color.DarkGoldenrod);
-            Velocity = 1.5f;
+            Velocity = 2.5f;
         }
 
         public void SetColors(float cyclePeriod, Color minColor, Color maxColor)
